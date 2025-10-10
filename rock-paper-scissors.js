@@ -19,8 +19,8 @@ function getHumanChoice () {
     return human.toLowerCase()    
 }
 
-humanScore = 0
-compScore = 0
+let humanScore = 0
+let compScore = 0
 
 function playRound(humanChoice, compChoice) {
     // human rock
@@ -73,5 +73,7 @@ function playRound(humanChoice, compChoice) {
 
 const humanSelection = getHumanChoice()
 const compSelection = getComputerChoice()
+
+playRound(humanSelection, compSelection)
 
 // is it okay to commit one big change (not micro changes) in one commit?
