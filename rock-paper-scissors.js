@@ -69,6 +69,7 @@ function playRound(humanChoice, compChoice) {
         humanScore += 1;
         console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
     }
+    return (humanScore, compScore)
 }
 
 const humanSelection = getHumanChoice()
