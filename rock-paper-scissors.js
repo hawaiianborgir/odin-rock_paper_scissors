@@ -13,6 +13,11 @@ function getComputerChoice () {
     return comp
 }
 
+function getHumanChoice () {
+    let human = prompt("Please enter your choice: rock, paper, or scissors?")
+
+    return human.toLowerCase()    
+}
 
 
 // is it okay to commit one big change (not micro changes) in one commit?
