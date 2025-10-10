@@ -19,5 +19,8 @@ function getHumanChoice () {
     return human.toLowerCase()    
 }
 
+humanScore = 0
+compScore = 0
+
 
 // is it okay to commit one big change (not micro changes) in one commit?
