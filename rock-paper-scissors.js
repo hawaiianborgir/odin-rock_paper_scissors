@@ -71,4 +71,7 @@ function playRound(humanChoice, compChoice) {
     }
 }
 
+const humanSelection = getHumanChoice()
+const compSelection = getComputerChoice()
+
 // is it okay to commit one big change (not micro changes) in one commit?
