@@ -22,5 +22,22 @@ function getHumanChoice () {
 humanScore = 0
 compScore = 0
 
+function playRound(humanChoice, compChoice) {
+    if (humanChoice == "rock" && compChoice == "rock") {
+        console.log("Player:rock vs. NPC:rock");
+        console.log("DRAW!");
+        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
+    } else if (humanChoice == "rock" && compChoice == "paper") {
+        console.log("Player:rock vs. NPC:paper");
+        console.log("You Lose");
+        compScore += 1;
+        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
+    } else if (humanChoice == "rock" && compChoice == "scissors") {
+        console.log("Player:rock vs. NPC:scissors");
+        console.log("You WIN!");
+        humanScore += 1;
+        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
+    }
+}
 
 // is it okay to commit one big change (not micro changes) in one commit?
