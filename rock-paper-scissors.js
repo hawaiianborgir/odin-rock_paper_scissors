@@ -22,52 +22,37 @@ function getHumanChoice () {
 let humanScore = 0
 let compScore = 0
 
+
+function isDraw(humanChoice, compChoice) {
+    if (humanChoice == compChoice) return true;
+}
+
+function isHumanWin(humanChoice,compChoice) {
+    if (humanChoice == "rock" && compChoice == "scissors" ||
+        humanChoice == "paper" && compChoice == "rock" ||
+        humanChoice == "scissors" && compChoice == "paper"
+    ) return true;
+}
+
 function playRound(humanChoice, compChoice) {
     // human rock
-    if (humanChoice == "rock" && compChoice == "rock") {
-        console.log("Player:rock vs. NPC:rock");
-        console.log("DRAW!");
-        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
-    } else if (humanChoice == "rock" && compChoice == "paper") {
-        console.log("Player:rock vs. NPC:paper");
-        console.log("You Lose");
-        compScore += 1;
-        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
-    } else if (humanChoice == "rock" && compChoice == "scissors") {
-        console.log("Player:rock vs. NPC:scissors");
+    if (isDraw(humanChoice, compChoice)) {
+        console.log(`Player:${humanChoice} vs NPC:${compChoice}`);
+        console.log("DRAW!")
+        console.log(`Player Score: ${humanScore} vs NPC Score: ${compScore}`)
+        console.log("---")
+    } else if (isHumanWin(humanChoice, compChoice)) {
+        console.log(`Player:${humanChoice} vs NPC:${compChoice}`);
         console.log("You WIN!");
         humanScore += 1;
-        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
-    // human paper
-    } else if (humanChoice == "paper" && compChoice == "paper") {
-        console.log("Player:paper vs. NPC:paper");
-        console.log("DRAW!");
-        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
-    } else if (humanChoice == "paper" && compChoice == "scissors") {
-        console.log("Player:paper vs. NPC:scissors");
-        console.log("You Lose");
+        console.log(`Player Score: ${humanScore} vs NPC Score: ${compScore}`);
+        console.log("---")
+    } else {
+        console.log(`Player:${humanChoice} vs NPC:${compChoice}`);
+        console.log("You Lose!");
         compScore += 1;
-        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
-    } else if (humanChoice == "paper" && compChoice == "rock") {
-        console.log("Player:paper vs. NPC:rock");
-        console.log("You WIN!");
-        humanScore += 1;
-        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
-    // human scissors
-    } else if (humanChoice == "scissors" && compChoice == "scissors") {
-        console.log("Player:scissors vs. NPC:scissors");
-        console.log("DRAW!");
-        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
-    } else if (humanChoice == "scissors" && compChoice == "rock") {
-        console.log("Player:scissors vs. NPC:rock");
-        console.log("You Lose");
-        compScore += 1;
-        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
-    } else if (humanChoice == "scissors" && compChoice == "paper") {
-        console.log("Player:scissors vs. NPC:paper");
-        console.log("You WIN!");
-        humanScore += 1;
-        console.log("Player Score: " + humanScore +" & " +"NPC Score: " +compScore);
+        console.log(`Player Score: ${humanScore} vs NPC Score: ${compScore}`);
+        console.log("---")
     }
     return (humanScore, compScore);
 }
@@ -80,6 +65,13 @@ function playGame() {
         humanSelection = getHumanChoice();
         compSelection = getComputerChoice();
         playRound(humanSelection, compSelection);
+    }
+    if (humanScore > compScore) {
+        console.log(`Final Score! Player: ${humanScore} vs NPC: ${compScore}`)
+        console.log("You've won the game!")
+    } else {
+        console.log(`Final Score! Player: ${humanScore} vs NPC: ${compScore}`)
+        console.log("You've lost the game.")
     }
 }
 
