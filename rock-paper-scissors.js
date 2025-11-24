@@ -13,15 +13,9 @@ function getComputerChoice () {
     return comp
 }
 
-function getHumanChoice () {
-    let human = prompt("Please enter your choice: rock, paper, or scissors?")
-
-    return human.toLowerCase()    
+function getHumanChoice (choice) {
+    return choice;  
 }
-
-let humanScore = 0
-let compScore = 0
-
 
 function isDraw(humanChoice, compChoice) {
     if (humanChoice == compChoice) return true;
@@ -34,50 +28,56 @@ function isHumanWin(humanChoice,compChoice) {
     ) return true;
 }
 
+let humanScore = 0;
+let compScore = 0;
+let round = 1;
+
+const selection = document.querySelector(".selection");
+const result = document.querySelector(".result");
+const stats = document.querySelector(".status");
+const mainContainer = document.querySelector(".container");
+
+
 function playRound(humanChoice, compChoice) {
-    // human rock
     if (isDraw(humanChoice, compChoice)) {
-        console.log(`Player:${humanChoice} vs NPC:${compChoice}`);
-        console.log("DRAW!")
-        console.log(`Player Score: ${humanScore} vs NPC Score: ${compScore}`)
-        console.log("---")
+        selection.textContent = `Player:${humanChoice} vs NPC:${compChoice}`;
+        result.textContent = "Draw!";
+        stats.textContent = `Player Score: ${humanScore} vs NPC Score: ${compScore}`;
     } else if (isHumanWin(humanChoice, compChoice)) {
-        console.log(`Player:${humanChoice} vs NPC:${compChoice}`);
-        console.log("You WIN!");
+        selection.textContent = `Player:${humanChoice} vs NPC:${compChoice}`
+        result.textContent = "WIN!";
         humanScore += 1;
-        console.log(`Player Score: ${humanScore} vs NPC Score: ${compScore}`);
-        console.log("---")
+        stats.textContent = `Player Score: ${humanScore} vs NPC Score: ${compScore}`;
     } else {
-        console.log(`Player:${humanChoice} vs NPC:${compChoice}`);
-        console.log("You Lose!");
+        selection.textContent = `Player:${humanChoice} vs NPC:${compChoice}`
+        result.textContent = "Lose!";
         compScore += 1;
-        console.log(`Player Score: ${humanScore} vs NPC Score: ${compScore}`);
-        console.log("---")
+        stats.textContent = `Player Score: ${humanScore} vs NPC Score: ${compScore}`;
     }
     return (humanScore, compScore);
 }
 
-let humanSelection;
-let compSelection;
-
-function playGame() {
-    for (let i=1; i<=5; i++) {
-        humanSelection = getHumanChoice();
-        compSelection = getComputerChoice();
-        playRound(humanSelection, compSelection);
-    }
-    if (humanScore > compScore) {
-        console.log(`Final Score! Player: ${humanScore} vs NPC: ${compScore}`)
-        console.log("You've won the game!")
-    } else {
-        console.log(`Final Score! Player: ${humanScore} vs NPC: ${compScore}`)
-        console.log("You've lost the game.")
-    }
+function playGame(choice) {
+        playRound(getHumanChoice(choice), getComputerChoice());
+        if (humanScore == 5 || compScore == 5) {
+            mainContainer.innerHTML = "";
+            const win = document.createElement("h1");
+            document.body.appendChild(win);
+            if (humanScore == 5) {
+                win.textContent = "You Win!"
+            } else {
+                win.textContent = "NPC Win!"
+            }
+        }
 }
 
-playGame()
+const buttons = document.querySelectorAll(".choice")
+
+buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        e.preventDefault()
+        playGame(button.dataset.choice);
+    })
+})
 
 
-
-// this game has no countermeasure to address typo by user.
-// I can add it, but it is not the focus for this project.
